@@ -16,8 +16,7 @@ export default function TextInputPanel(props: TextInputPanelProps) {
 
   return (
     <section className="panel">
-      <h2>Text eingeben</h2>
-      <p className="label">Typ</p>
+      <h2 className="section-title editor-title">Text eingeben</h2>
       <div className="category-row" role="radiogroup" aria-label="Post-Typ">
         <label className={`category-pill${category === 'aussage' ? ' active' : ''}`}>
           <input
@@ -51,7 +50,7 @@ export default function TextInputPanel(props: TextInputPanelProps) {
         </label>
       </div>
       <label className="label" htmlFor="post-text">
-        Spruch fuer den Post
+        Spruch eingeben
       </label>
       <textarea
         id="post-text"
@@ -59,13 +58,12 @@ export default function TextInputPanel(props: TextInputPanelProps) {
         value={text}
         onChange={(event) => onTextChange(event.target.value)}
         rows={7}
-        placeholder="Zum Beispiel: Weniger reden, mehr liefern."
+        placeholder="Der Ball ist rund und ein Spiel dauert 60min."
       />
       {error ? <p className="error">{error}</p> : null}
-      <button className="btn btn-primary" type="button" onClick={onGenerate} disabled={generateDisabled}>
+      <button className="btn btn-primary generate-btn" type="button" onClick={onGenerate} disabled={generateDisabled}>
         {isGenerating ? 'Generiere...' : 'Bild generieren'}
       </button>
     </section>
   );
 }
-

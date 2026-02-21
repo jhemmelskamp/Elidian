@@ -14,10 +14,12 @@ type EditorState = {
   settingsSnapshot?: AppSettings;
 };
 
+const DEFAULT_POST_TEXT = 'Der Ball ist rund und ein Spiel dauert 60min.';
+
 export default function EditorPage() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [text, setText] = useState('');
+  const [text, setText] = useState(DEFAULT_POST_TEXT);
   const [settings, setSettings] = useState<AppSettings>(() => loadSettings());
   const [isGenerating, setIsGenerating] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -89,7 +91,7 @@ export default function EditorPage() {
     if (!lastBlob) {
       return;
     }
-    downloadBlob(lastBlob, timestampFilename('post', 'png'));
+    downloadBlob(lastBlob, timestampFilename(trimmedText, 'png'));
   }
 
   function handleCategoryChange(category: PostCategory): void {

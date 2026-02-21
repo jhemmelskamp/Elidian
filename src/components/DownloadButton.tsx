@@ -6,7 +6,7 @@ type DownloadButtonProps = {
 export default function DownloadButton({ disabled, onDownload }: DownloadButtonProps) {
   return (
     <button className="btn btn-secondary" type="button" onClick={onDownload} disabled={disabled}>
-      PNG herunterladen
+      Bild herunterladen
     </button>
   );
 }

@@ -67,117 +67,130 @@ export default function SettingsPage() {
 
   return (
     <section className="panel">
-      <h2>Konfiguration</h2>
+      <h2 className="section-title">Einstellungen</h2>
       <div className="settings-grid">
-        <label className="label" htmlFor="category">
-          Typ
-        </label>
-        <select
-          id="category"
-          className="input"
-          value={settings.category}
-          onChange={(event) => updateCategory(event.target.value as PostCategory)}
-        >
-          <option value="aussage">Aussage</option>
-          <option value="film">Film</option>
-          <option value="zitat">Zitat</option>
-        </select>
+        <section className="settings-group">
+          <h3>Format</h3>
+          <label className="label" htmlFor="category">
+            Typ
+          </label>
+          <select
+            id="category"
+            className="input"
+            value={settings.category}
+            onChange={(event) => updateCategory(event.target.value as PostCategory)}
+          >
+            <option value="aussage">Aussage</option>
+            <option value="film">Film</option>
+            <option value="zitat">Zitat</option>
+          </select>
 
-        <label className="label" htmlFor="width">
-          Breite
-        </label>
-        <input
-          id="width"
-          className="input"
-          type="number"
-          min={SETTINGS_LIMITS.width.min}
-          max={SETTINGS_LIMITS.width.max}
-          value={settings.width}
-          onChange={(event) => updateField('width', Number(event.target.value))}
-        />
-        {errors.width ? <p className="error">{errors.width}</p> : null}
+          <label className="label" htmlFor="width">
+            Breite
+          </label>
+          <input
+            id="width"
+            className="input"
+            type="number"
+            min={SETTINGS_LIMITS.width.min}
+            max={SETTINGS_LIMITS.width.max}
+            value={settings.width}
+            onChange={(event) => updateField('width', Number(event.target.value))}
+          />
+          {errors.width ? <p className="error">{errors.width}</p> : null}
 
-        <label className="label" htmlFor="height">
-          Hoehe
-        </label>
-        <input
-          id="height"
-          className="input"
-          type="number"
-          min={SETTINGS_LIMITS.height.min}
-          max={SETTINGS_LIMITS.height.max}
-          value={settings.height}
-          onChange={(event) => updateField('height', Number(event.target.value))}
-        />
-        {errors.height ? <p className="error">{errors.height}</p> : null}
+          <label className="label" htmlFor="height">
+            Hoehe
+          </label>
+          <input
+            id="height"
+            className="input"
+            type="number"
+            min={SETTINGS_LIMITS.height.min}
+            max={SETTINGS_LIMITS.height.max}
+            value={settings.height}
+            onChange={(event) => updateField('height', Number(event.target.value))}
+          />
+          {errors.height ? <p className="error">{errors.height}</p> : null}
+        </section>
 
-        <label className="label" htmlFor="baseFontSize">
-          Schriftgroesse
-        </label>
-        <input
-          id="baseFontSize"
-          className="input"
-          type="number"
-          min={SETTINGS_LIMITS.baseFontSize.min}
-          max={SETTINGS_LIMITS.baseFontSize.max}
-          value={settings.baseFontSize}
-          onChange={(event) => updateField('baseFontSize', Number(event.target.value))}
-        />
-        {errors.baseFontSize ? <p className="error">{errors.baseFontSize}</p> : null}
+        <section className="settings-group">
+          <h3>Typografie</h3>
+          <label className="label" htmlFor="baseFontSize">
+            Schriftgroesse
+          </label>
+          <input
+            id="baseFontSize"
+            className="input"
+            type="number"
+            min={SETTINGS_LIMITS.baseFontSize.min}
+            max={SETTINGS_LIMITS.baseFontSize.max}
+            value={settings.baseFontSize}
+            onChange={(event) => updateField('baseFontSize', Number(event.target.value))}
+          />
+          {errors.baseFontSize ? <p className="error">{errors.baseFontSize}</p> : null}
 
-        <label className="label" htmlFor="bgColor">
-          Hintergrundfarbe (aus Typ)
-        </label>
-        <input id="bgColor" className="input" type="color" value={settings.bgColor} readOnly />
+          <label className="label" htmlFor="textColor">
+            Textfarbe
+          </label>
+          <input
+            id="textColor"
+            className="input"
+            type="color"
+            value={settings.textColor}
+            onChange={(event) => updateField('textColor', event.target.value)}
+          />
 
-        <label className="label" htmlFor="textColor">
-          Textfarbe
-        </label>
-        <input
-          id="textColor"
-          className="input"
-          type="color"
-          value={settings.textColor}
-          onChange={(event) => updateField('textColor', event.target.value)}
-        />
+          <label className="label" htmlFor="fontFamily">
+            Schriftfamilie
+          </label>
+          <input id="fontFamily" className="input" type="text" value={settings.fontFamily} readOnly />
+          <p className="muted">Fester Wert: Aptos Narrow Bold (mit Fallback auf aehnliche Schriften).</p>
+        </section>
 
-        <label className="label" htmlFor="fontFamily">
-          Schriftfamilie
-        </label>
-        <input id="fontFamily" className="input" type="text" value={settings.fontFamily} readOnly />
-        <p className="muted">Fester Wert: Aptos Narrow Bold (mit Fallback auf aehnliche Schriften).</p>
+        <section className="settings-group">
+          <h3>Branding</h3>
+          <label className="label" htmlFor="bgColor">
+            Hintergrundfarbe (aus Typ)
+          </label>
+          <input id="bgColor" className="input" type="color" value={settings.bgColor} readOnly />
 
-        <label className="label" htmlFor="logoScale">
-          Logo-Skalierung
-        </label>
-        <input
-          id="logoScale"
-          className="input"
-          type="number"
-          step="0.01"
-          min={SETTINGS_LIMITS.logoScale.min}
-          max={SETTINGS_LIMITS.logoScale.max}
-          value={settings.logoScale}
-          onChange={(event) => updateField('logoScale', Number(event.target.value))}
-        />
-        {errors.logoScale ? <p className="error">{errors.logoScale}</p> : null}
+          <label className="label" htmlFor="logoScale">
+            Logo-Skalierung
+          </label>
+          <input
+            id="logoScale"
+            className="input"
+            type="number"
+            step="0.01"
+            min={SETTINGS_LIMITS.logoScale.min}
+            max={SETTINGS_LIMITS.logoScale.max}
+            value={settings.logoScale}
+            onChange={(event) => updateField('logoScale', Number(event.target.value))}
+          />
+          {errors.logoScale ? <p className="error">{errors.logoScale}</p> : null}
+        </section>
 
-        <label className="label" htmlFor="padding">
-          Padding
-        </label>
-        <input
-          id="padding"
-          className="input"
-          type="number"
-          min={SETTINGS_LIMITS.padding.min}
-          max={SETTINGS_LIMITS.padding.max}
-          value={settings.padding}
-          onChange={(event) => updateField('padding', Number(event.target.value))}
-        />
-        {errors.padding ? <p className="error">{errors.padding}</p> : null}
+        <section className="settings-group">
+          <h3>Abstaende</h3>
+          <label className="label" htmlFor="padding">
+            Padding
+          </label>
+          <input
+            id="padding"
+            className="input"
+            type="number"
+            min={SETTINGS_LIMITS.padding.min}
+            max={SETTINGS_LIMITS.padding.max}
+            value={settings.padding}
+            onChange={(event) => updateField('padding', Number(event.target.value))}
+          />
+          {errors.padding ? <p className="error">{errors.padding}</p> : null}
+        </section>
       </div>
+
       {notice ? <p className="muted">{notice}</p> : null}
-      <div className="row">
+      <div className="row settings-actions">
         <button className="btn btn-primary" type="button" onClick={handleSave}>
           Speichern
         </button>

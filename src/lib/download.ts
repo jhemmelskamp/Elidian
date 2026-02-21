@@ -1,4 +1,20 @@
-export function timestampFilename(prefix = 'post', ext = 'png'): string {
+function slugify(text: string): string {
+  const normalized = text
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  if (!normalized) {
+    return 'post';
+  }
+
+  return normalized.slice(0, 80);
+}
+
+export function timestampFilename(text = 'post', ext = 'png'): string {
   const now = new Date();
   const pad = (value: number) => value.toString().padStart(2, '0');
   const yyyy = now.getFullYear();
@@ -7,7 +23,8 @@ export function timestampFilename(prefix = 'post', ext = 'png'): string {
   const hh = pad(now.getHours());
   const min = pad(now.getMinutes());
   const ss = pad(now.getSeconds());
-  return `${prefix}-${yyyy}${mm}${dd}-${hh}${min}${ss}.${ext}`;
+  const slug = slugify(text);
+  return `${slug}-${yyyy}${mm}${dd}-${hh}${min}${ss}.${ext}`;
 }
 
 export function downloadBlob(blob: Blob, filename: string): void {
@@ -20,4 +37,3 @@ export function downloadBlob(blob: Blob, filename: string): void {
   anchor.remove();
   URL.revokeObjectURL(url);
 }
-

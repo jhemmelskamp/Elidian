@@ -7,19 +7,20 @@ export default function App() {
   return (
     <div className="app-shell">
       <header className="header">
-        <div>
-          <h1>Elidian Post Builder</h1>
-          <p className="muted">Social-Media-Bilder aus Text in Sekunden erstellen</p>
+        <div className="brand-row">
+          <div className="brand-meta">
+            <h1>Elidian</h1>
+          </div>
         </div>
-        <nav className="nav">
+        <nav className="nav" aria-label="Hauptnavigation">
           <NavLink to="/" end className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-            Editor
+            Bild Erstellen
           </NavLink>
           <NavLink to="/history" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-            History
+            Verlauf auf diesem Gerät
           </NavLink>
           <NavLink to="/settings" className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}>
-            Konfiguration
+            Einstellungen
           </NavLink>
         </nav>
       </header>
@@ -33,4 +34,3 @@ export default function App() {
     </div>
   );
 }
-

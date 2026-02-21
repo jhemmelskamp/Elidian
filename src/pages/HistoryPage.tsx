@@ -59,7 +59,7 @@ export default function HistoryPage() {
     try {
       const logoImage = await loadLogoImage();
       const blob = await renderPostToBlob({ text: item.text, settings: item.settingsSnapshot, logoImage });
-      downloadBlob(blob, timestampFilename('post', 'png'));
+      downloadBlob(blob, timestampFilename(item.text, 'png'));
     } catch {
       setError('Download aus der History fehlgeschlagen.');
     }
@@ -77,13 +77,13 @@ export default function HistoryPage() {
   return (
     <section className="panel">
       <div className="row row-between">
-        <h2>History</h2>
+        <h2 className="section-title">Verlauf auf diesem Geraet</h2>
         <button className="btn btn-ghost" type="button" onClick={handleClear} disabled={items.length === 0}>
-          Alle löschen
+          Alle loeschen
         </button>
       </div>
       {error ? <p className="error">{error}</p> : null}
-      {items.length === 0 ? <p className="muted">Noch keine Einträge vorhanden.</p> : null}
+      {items.length === 0 ? <p className="muted empty-note">Noch keine Eintraege vorhanden.</p> : null}
       <div className="history-list">
         {items.map((item) => (
           <article className="history-card" key={item.id}>
@@ -98,14 +98,14 @@ export default function HistoryPage() {
               <p className="history-text">{item.text}</p>
               <p className="muted">{new Date(item.createdAt).toLocaleString('de-DE')}</p>
               <div className="row">
-                <button className="btn btn-secondary" type="button" onClick={() => handleReuse(item)}>
+                <button className="btn btn-primary" type="button" onClick={() => handleReuse(item)}>
                   Erneut laden
                 </button>
                 <button className="btn btn-secondary" type="button" onClick={() => void handleDownload(item)}>
                   Download
                 </button>
                 <button className="btn btn-danger" type="button" onClick={() => handleDelete(item.id)}>
-                  Löschen
+                  Loeschen
                 </button>
               </div>
             </div>
